@@ -1,0 +1,44 @@
+.map {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+
+    &_radio_wrap {
+        position: absolute;
+        bottom: 48px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 12px;
+        background: var(--bgWhite);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 16px;
+        min-width: 652px;
+    }
+
+    &_radio_button:not(:first-child) {
+        margin-left: 20px;
+    }
+
+    &_selected {
+        position: absolute;
+        right: 52px;
+        top: 52px;
+        padding: 16px 28px;
+        border-radius: 12px;
+        background: var(--bgWhite);
+        color: var(--first);
+        min-width: 216px;
+
+        &_title {
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        &_charge {
+            margin: 8px 0;
+            font-size: 18px;
+        }
+    }
+}

@@ -1,0 +1,62 @@
+.nav {
+    background: var(--bgWhite);
+    min-width: 54px;
+    width: 54px;
+    // height: 300px;
+    transition: .3s ease width, .3s ease min-width;
+    padding: 32px 0;
+    overflow: hidden;
+
+    &.open {
+        min-width: 300px;
+        width: 300px;
+    }
+
+    &_hamburger {
+        font-size: 30px;
+        color: var(--firstLight);
+        margin-left: 16px;
+        cursor: pointer;
+    }
+
+    &_list {
+        margin-top: 40px;
+        width: 300px;
+    }
+
+    &_item {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 12px 16px;
+        position: relative;
+        color: var(--first);
+        transition: .3s ease;
+        color: var(--first);
+
+        &::before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--orange);
+        }
+
+        span:first-child {
+            width: 30px;
+        }
+
+        span:last-child {
+            margin-left: 20px;
+        }
+
+        &.active {
+            background-color: #dfe6e9;
+
+            &::before {
+                content: '';
+            }
+        }
+    }
+}
