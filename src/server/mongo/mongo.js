@@ -5,7 +5,8 @@ const mongoConnect = async () => {
         await mongoose.connect('mongodb+srv://sergey:sergey@cluster0.xtdqw.mongodb.net/eleven?retryWrites=true&w=majority', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            useCreateIndex: true
+            useCreateIndex: true,
+            // useFindAndModify: false
         })
 
         console.log('Соединение с mongo установлено')

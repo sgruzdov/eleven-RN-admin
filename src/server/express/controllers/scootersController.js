@@ -3,9 +3,38 @@ const ScooterModel = require('../../mongo/models/Scooter')
 
 class scootersController {
     async getScooters(req, res) {
-        const result = await ScooterModel.find(JSON.parse(req.query[0]))
-        res.json(result)
+        try {
+            const result = await ScooterModel.find(JSON.parse(req.query[0]))
+            res.json(result)
+        } catch(e) {
+            console.log(e)
+            res.status(400).json('Ошибка получения данных')
+        }
     }
+
+    async changeStatusActive(req, res) {
+        try {
+            const { id, status } = req.body
+            const result = await ScooterModel.updateOne({scooterId: id}, {active: status})
+
+            if(result.n !== 1) {
+                return res.status(400).json('Ошибка изменения состояния')
+            } else {
+                const findSelectedScooter = await ScooterModel.findOne({scooterId: id})
+                
+                if(findSelectedScooter === null) {
+                    return res.status(400).send('Ошибка изменения состояния')
+                }
+
+                res.send(findSelectedScooter)
+            }
+
+        } catch (e) {
+            console.log(e)
+            res.status(400).json('Ошибка изменения состояния')
+        }
+    }
+    
 
 
 
