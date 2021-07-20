@@ -50,13 +50,13 @@ class scootersController {
 
     // async addScooter(req, res) {
     //     const getRandomIntInclusive = (min, max) => {
-    //         min = Math.ceil(min);
-    //         max = Math.floor(max);
-    //         return Math.floor(Math.random() * (max - min + 1)) + min; 
+    //         min = Math.ceil(min)
+    //         max = Math.floor(max)
+    //         return Math.floor(Math.random() * (max - min + 1)) + min
     //     }
     
     //     const getRandomIntInclusive2 = (min, max) => {
-    //         return Math.random() * (max - min) + min; 
+    //         return Math.random() * (max - min) + min
     //     }
     
     //     for(let i = 0; i < 100; i++) {

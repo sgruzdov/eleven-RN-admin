@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 
 import { GOOGLE_API_KEY } from '../../assets/constants'
 import * as styles from './Home.module.scss'
-import { getScootersThunk, REMOVE_SCOOTERS, SET_SELECTED_SCOOTER, changeStatusActiveThunk } from '../../redux/reducers/scootersReducer'
+import { getScootersThunk, REMOVE_SCOOTERS, changeStatusActiveThunk } from '../../redux/reducers/scootersReducer'
 import Loading from '../../components/Loading/Loading'
 import Marker from '../../components/Marker'
 

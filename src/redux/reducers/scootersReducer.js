@@ -8,7 +8,6 @@ export const IS_LOAD_SCOOTERS_LIST = 'IS_LOAD_SCOOTERS_LIST'
 export const SET_SCOOTERS = 'SET_SCOOTERS'
 export const REMOVE_SCOOTERS = 'REMOVE_SCOOTERS'
 export const SET_SELECTED_SCOOTER = 'SET_SELECTED_SCOOTER'
-export const CHANGE_STATUS_ACTIVE = 'CHANGE_STATUS_ACTIVE'
 export const SET_SCOOTERS_LIST_COUNT = 'SET_SCOOTERS_LIST_COUNT'
 
 const initialState = {
@@ -46,10 +45,6 @@ export const scootersReducer = (state = initialState, action) => {
         case SET_SELECTED_SCOOTER:
             return produce(state, draft => {
                 draft.selectedScooter = action.payload
-            })
-        case CHANGE_STATUS_ACTIVE:
-            return produce(state, draft => {
-                // draft.selectedScooter.
             })
         default:
             return state

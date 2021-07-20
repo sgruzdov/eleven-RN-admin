@@ -4,10 +4,10 @@ import { TableCell, TableRow, CircularProgress, Table, Paper, TableContainer, Ta
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import GoogleMapReact from 'google-map-react'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 
 import Loading from '../../components/Loading/Loading'
-import { getScootersThunk, REMOVE_SCOOTERS, getScootersPaginationThunk } from '../../redux/reducers/scootersReducer'
+import { REMOVE_SCOOTERS, getScootersPaginationThunk } from '../../redux/reducers/scootersReducer'
 import * as styles from './Scooters.module.scss'
 import { GOOGLE_API_KEY } from '../../assets/constants'
 import Marker from '../../components/Marker'
@@ -99,7 +99,8 @@ const Scooters = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {!scooters.loadingList
+                                {
+                                    !scooters.loadingList
                                     ? scooters.data.map(item => (<Row key={item.scooterId} scooter={item}/>))
                                     : <TableRow><TableCell colSpan={6} style={{border: 'none'}}><div style={{display: 'flex', justifyContent: 'center'}}><CircularProgress /></div></TableCell></TableRow>
                                 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import markerGreen from '../assets/icons/marker-green.png'
 import markerOrange from '../assets/icons/marker-orange.png'
