@@ -13,11 +13,7 @@ import { GOOGLE_API_KEY } from '../../assets/constants'
 import * as styles from './Home.module.scss'
 import { getScootersThunk, REMOVE_SCOOTERS, SET_SELECTED_SCOOTER, changeStatusActiveThunk } from '../../redux/reducers/scootersReducer'
 import Loading from '../../components/Loading/Loading'
-
-import markerGreen from '../../assets/icons/marker-green.png'
-import markerOrange from '../../assets/icons/marker-orange.png'
-import markerRed from '../../assets/icons/marker-red.png'
-
+import Marker from '../../components/Marker'
 
 
 const Home = React.memo(() => {
@@ -27,27 +23,6 @@ const Home = React.memo(() => {
         userActive: false,
         breakdown: false
     })
-
-    const Marker = ({ marker }) => {
-        const charge = () => {
-            let charge = null
-    
-            if(marker.charge >= 50) {
-                charge = markerGreen
-            } else if(marker.charge > 29 && marker.charge < 49 ) {
-                charge = markerOrange
-            } else {
-                charge = markerRed
-            }
-            return charge
-        }
-    
-        return(
-            <div style={{cursor: 'pointer'}} onClick={() => dispatch({ type: SET_SELECTED_SCOOTER, payload: marker })}>
-                <img style={{width: '30px'}} src={charge()} alt="marker" />
-            </div>
-        )
-    }
 
     const dispatch = useDispatch()
     const scooters = useSelector(state => state.scooters)

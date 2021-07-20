@@ -15,14 +15,12 @@ const context = {}
 
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Router bacename={process.env.PUBLIC_URL}>
-            <Provider store={store}>
-                <Context.Provider value={{...context}}>
-                    <App />
-                </Context.Provider>
-            </Provider>
-        </Router>
-    </React.StrictMode>,
+    <Router bacename={process.env.PUBLIC_URL}>
+        <Provider store={store}>
+            <Context.Provider value={{...context}}>
+                <App />
+            </Context.Provider>
+        </Provider>
+    </Router>,
     document.getElementById('root')
 )

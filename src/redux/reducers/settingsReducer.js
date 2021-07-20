@@ -6,7 +6,7 @@ export const IS_MENU = 'IS_MENU'
 
 const initialState = {
     loading: false,
-    isMenu: true,
+    isMenu: false,
 }
 
 

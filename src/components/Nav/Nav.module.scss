@@ -1,11 +1,12 @@
 .nav {
     background: var(--bgWhite);
     min-width: 54px;
-    width: 54px;
+    width: 68px;
     // height: 300px;
     transition: .3s ease width, .3s ease min-width;
     padding: 32px 0;
     overflow: hidden;
+    box-shadow: -12px 0 10px 10px #0006;
 
     &.open {
         min-width: 300px;
@@ -13,7 +14,7 @@
     }
 
     &_hamburger {
-        font-size: 30px;
+        font-size: 30px!important;
         color: var(--firstLight);
         margin-left: 16px;
         cursor: pointer;
@@ -33,6 +34,10 @@
         color: var(--first);
         transition: .3s ease;
         color: var(--first);
+
+        &:hover {
+            background-color: #ebf0f2;
+        }
 
         &::before {
             position: absolute;

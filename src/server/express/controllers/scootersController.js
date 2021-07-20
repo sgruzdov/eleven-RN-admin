@@ -35,7 +35,17 @@ class scootersController {
         }
     }
     
-
+    async getScootersPagination(req, res) {
+            const { skip, size } = req.query
+        try {
+            const data = await ScooterModel.find({}).skip(+skip).limit(+size)
+            const count = await ScooterModel.countDocuments()
+            return res.send({data, count})            
+        } catch (e) {
+            console.log(e)
+            res.status(400).json('Ошибка получения данных')
+        }
+    }
 
 
     // async addScooter(req, res) {

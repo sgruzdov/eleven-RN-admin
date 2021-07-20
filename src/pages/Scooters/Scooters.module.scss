@@ -1,0 +1,14 @@
+.scooter {
+    &_cell {
+        border-bottom: unset;
+
+        &_descr {
+            padding: 16;
+        }
+
+        &_map {
+            height: 300px;
+            width: 100%;
+        }
+    }
+}
