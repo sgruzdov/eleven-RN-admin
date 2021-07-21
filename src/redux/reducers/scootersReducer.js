@@ -67,7 +67,7 @@ export const getScootersThunk = (data = {}) => async dispatch => {
 export const changeStatusActiveThunk = (id, status, typeActive) => async dispatch => {
     dispatch({ type: IS_LOAD_SCOOTERS, payload: true })
     try {
-        const res = await axios.post(`${URL}/scooters/changeStatusActive`, {id, status})
+        const res = await axios.patch(`${URL}/scooters/changeStatusActive`, {id, status})
         
         await dispatch(getScootersThunk(typeActive))
 

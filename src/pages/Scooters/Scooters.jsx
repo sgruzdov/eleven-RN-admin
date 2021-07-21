@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { TableCell, TableRow, CircularProgress, Table, Paper, TableContainer, TableHead, TableBody, Collapse, TablePagination, IconButton } from '@material-ui/core'
+import { TableCell, Button, TableRow, CircularProgress, Table, Paper, TableContainer, TableHead, TableBody, Collapse, TablePagination, IconButton } from '@material-ui/core'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import GoogleMapReact from 'google-map-react'
@@ -33,23 +33,29 @@ const Row = ({ scooter }) => {
             <TableRow>
                 <TableCell style={{padding: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <div className={styles.scooter_cell_descr}>
-                            
+                        <div className={styles.scooter_cell_wrap}>
+                            <div className={styles.scooter_cell_descr}>
+                                <div className={styles.scooter_cell_descr_title}>Действия</div>
+
+                                <div className={styles.scooter_cell_descr_buttons}>
+                                    <Button color="primary" variant="outlined">Изменить статусы</Button>
+                                    <Button color="secondary" variant="outlined">Удалить самокат</Button>
+                                </div>
+                            </div>
+                            <div className={styles.scooter_cell_map}>
+                                <GoogleMapReact
+                                    bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
+                                    defaultCenter={[scooter.location.latitude, scooter.location.longitude]}
+                                    defaultZoom={14}
+                                >
+                                    <Marker
+                                        lat={scooter.location.latitude}
+                                        lng={scooter.location.longitude}
+                                        marker={scooter}
+                                    />
+                                </GoogleMapReact>
+                            </div>
                         </div>
-                        <div className={styles.scooter_cell_map}>
-                            <GoogleMapReact
-                                bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
-                                defaultCenter={[scooter.location.latitude, scooter.location.longitude]}
-                                defaultZoom={14}
-                            >
-                                <Marker
-                                    lat={scooter.location.latitude}
-                                    lng={scooter.location.longitude}
-                                    marker={scooter}
-                                />
-                            </GoogleMapReact>
-                        </div>
-                        
                     </Collapse>
                 </TableCell>
             </TableRow>
@@ -85,39 +91,39 @@ const Scooters = () => {
     return (
         <div className="content">
             <div className="main-title">Самокаты</div>
-                <Paper>
-                    <TableContainer style={{ height: '688px', width: '100%' }}>
-                        <Table stickyHeader aria-label="collapsible table">
-                            <TableHead>
-                                <TableRow >
-                                    <TableCell></TableCell>
-                                    <TableCell>ID</TableCell>
-                                    <TableCell align="center">Зарядка</TableCell>
-                                    <TableCell align="center">В работе</TableCell>
-                                    <TableCell align="center">У пользователя</TableCell>
-                                    <TableCell align="right">Сломан</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {
-                                    !scooters.loadingList
-                                    ? scooters.data.map(item => (<Row key={item.scooterId} scooter={item}/>))
-                                    : <TableRow><TableCell colSpan={6} style={{border: 'none'}}><div style={{display: 'flex', justifyContent: 'center'}}><CircularProgress /></div></TableCell></TableRow>
-                                }
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                    <TablePagination
-                        component="div"
-                        labelRowsPerPage="Самокатов на странице"
-                        rowsPerPageOptions={[10, 25, 50]}
-                        count={+scooters.scootersListCount}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        onPageChange={handleChangePage}
-                        onRowsPerPageChange={handleChangeRowsPerPage}
-                    />
-                </Paper>
+            <Paper>
+                <TableContainer style={{ height: '688px', width: '100%' }}>
+                    <Table stickyHeader aria-label="collapsible table">
+                        <TableHead>
+                            <TableRow >
+                                <TableCell></TableCell>
+                                <TableCell>ID</TableCell>
+                                <TableCell align="center">Зарядка</TableCell>
+                                <TableCell align="center">В работе</TableCell>
+                                <TableCell align="center">У пользователя</TableCell>
+                                <TableCell align="right">Сломан</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {
+                                !scooters.loadingList
+                                ? scooters.data.map(item => (<Row key={item.scooterId} scooter={item}/>))
+                                : <TableRow><TableCell colSpan={6} style={{border: 'none'}}><div style={{display: 'flex', justifyContent: 'center'}}><CircularProgress /></div></TableCell></TableRow>
+                            }
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <TablePagination
+                    component="div"
+                    labelRowsPerPage="Самокатов на странице"
+                    rowsPerPageOptions={[10, 25, 50]}
+                    count={+scooters.scootersListCount}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Paper>
             {scooters.loading && <Loading />}
         </div>
     )
