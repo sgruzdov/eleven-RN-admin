@@ -1,75 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { TableCell, Button, TableRow, CircularProgress, Table, Paper, TableContainer, TableHead, TableBody, Collapse, TablePagination, IconButton } from '@material-ui/core'
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
-import GoogleMapReact from 'google-map-react'
+import { TableCell, TableRow, CircularProgress, Table, Paper, TableContainer, TableHead, TableBody, TablePagination } from '@material-ui/core'
 // import { useHistory } from 'react-router-dom'
 
 import Loading from '../../components/Loading/Loading'
 import { REMOVE_SCOOTERS, getScootersPaginationThunk } from '../../redux/reducers/scootersReducer'
-import * as styles from './Scooters.module.scss'
-import { GOOGLE_API_KEY } from '../../assets/constants'
-import Marker from '../../components/Marker'
+import ScooterTableItem from './ScooterTableItem/ScooterTableItem'
+
+// import * as styles from './Scooters.module.scss'
 
 
-const Row = ({ scooter }) => {
-    const [open, setOpen] = useState(false)
-
-    return (
-        <>
-            <TableRow>
-                <TableCell className={styles.scooter_cell}>
-                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    </IconButton>
-                </TableCell>
-                <TableCell className={styles.scooter_cell}>{scooter.scooterId}</TableCell>
-                <TableCell className={styles.scooter_cell} align="center">{scooter.charge}</TableCell>
-                <TableCell className={styles.scooter_cell} align="center">{scooter.active ? 'Активно' : 'Не активно'}</TableCell>
-                <TableCell className={styles.scooter_cell} align="center">{scooter.userActive ? 'Активно' : 'Не активно'}</TableCell>
-                <TableCell className={styles.scooter_cell} align="right">{scooter.breakdown ? 'Активно' : 'Не активно'}</TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell style={{padding: 0}} colSpan={6}>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <div className={styles.scooter_cell_wrap}>
-                            <div className={styles.scooter_cell_descr}>
-                                <div className={styles.scooter_cell_descr_title}>Действия</div>
-
-                                <div className={styles.scooter_cell_descr_buttons}>
-                                    <Button color="primary" variant="outlined">Изменить статусы</Button>
-                                    <Button color="secondary" variant="outlined">Удалить самокат</Button>
-                                </div>
-                            </div>
-                            <div className={styles.scooter_cell_map}>
-                                <GoogleMapReact
-                                    bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
-                                    defaultCenter={[scooter.location.latitude, scooter.location.longitude]}
-                                    defaultZoom={14}
-                                >
-                                    <Marker
-                                        lat={scooter.location.latitude}
-                                        lng={scooter.location.longitude}
-                                        marker={scooter}
-                                    />
-                                </GoogleMapReact>
-                            </div>
-                        </div>
-                    </Collapse>
-                </TableCell>
-            </TableRow>
-        </>
-    )
-}
 
 const Scooters = () => {
     // let history = useHistory()
     const dispatch = useDispatch()
     const scooters = useSelector(state => state.scooters)
 
-    const [page, setPage] = React.useState(0)
-    const [rowsPerPage, setRowsPerPage] = React.useState(10)
+    const [page, setPage] = useState(0)
+    const [rowsPerPage, setRowsPerPage] = useState(10)
   
     const handleChangePage = (_, newPage) => {
       setPage(newPage)
@@ -107,7 +55,7 @@ const Scooters = () => {
                         <TableBody>
                             {
                                 !scooters.loadingList
-                                ? scooters.data.map(item => (<Row key={item.scooterId} scooter={item}/>))
+                                ? scooters.data.map(item => (<ScooterTableItem key={item.scooterId} scooter={item}/>))
                                 : <TableRow><TableCell colSpan={6} style={{border: 'none'}}><div style={{display: 'flex', justifyContent: 'center'}}><CircularProgress /></div></TableCell></TableRow>
                             }
                         </TableBody>
