@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Marker component should render Marker component 1`] = `
+<Provider
+  store={
+    Object {
+      "@@observable": [Function],
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Marker
+    marker={
+      Object {
+        "__v": 0,
+        "_id": "60f5b4bad21fa65a98c3f9f5",
+        "active": true,
+        "breakdown": true,
+        "charge": 60,
+        "location": Object {
+          "latitude": 53.853253464874754,
+          "longitude": 27.601949922194905,
+        },
+        "scooterId": 955227,
+        "userActive": true,
+      }
+    }
+  >
+    <div
+      className="marker"
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+    >
+      <img
+        alt="marker"
+        src="marker-green.png"
+        style={
+          Object {
+            "width": "30px",
+          }
+        }
+      />
+    </div>
+  </Marker>
+</Provider>
+`;

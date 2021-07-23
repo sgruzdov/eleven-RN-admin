@@ -7,47 +7,51 @@ import { GOOGLE_API_KEY } from '../../assets/constants'
 import * as styles from './Home.module.scss'
 import { getScootersThunk, REMOVE_SCOOTERS, changeStatusActiveThunk } from '../../redux/reducers/scootersReducer'
 import Loading from '../../components/Loading/Loading'
-import Marker from '../../components/Marker'
-
+import Marker from '../../components/Marker/Marker'
 
 const Home = React.memo(() => {
     const [typeShows, setTypeShows] = useState({
         all: true,
         active: false,
         userActive: false,
-        breakdown: false
+        breakdown: false,
     })
 
     const dispatch = useDispatch()
-    const scooters = useSelector(state => state.scooters)
+    const scooters = useSelector((state) => state.scooters)
 
-
-    const changeType = type => {
-        setTypeShows(Object.fromEntries(Object.entries(typeShows).map(item => {
-            if(item[0] === type) {
-                type === 'all' ? dispatch(getScootersThunk()) : dispatch(getScootersThunk({[item[0]]: true}))
-                return [item[0], true]
-            } else { 
-                return [item[0], false]
-            }
-        })))
+    const changeType = (type) => {
+        setTypeShows(
+            Object.fromEntries(
+                Object.entries(typeShows).map((item) => {
+                    if (item[0] === type) {
+                        type === 'all' ? dispatch(getScootersThunk()) : dispatch(getScootersThunk({ [item[0]]: true }))
+                        return [item[0], true]
+                    } else {
+                        return [item[0], false]
+                    }
+                })
+            )
+        )
     }
 
     const changeStatusScooter = () => {
-        const findType = Object.entries(typeShows).find(item => item[1] === true)
+        const findType = Object.entries(typeShows).find((item) => item[1] === true)
         let typeActive = {}
 
-        if(findType[0] !== 'all') {
-            typeActive = {[findType[0]]: true}
+        if (findType[0] !== 'all') {
+            typeActive = { [findType[0]]: true }
         }
 
-        dispatch(changeStatusActiveThunk(scooters.selectedScooter.scooterId, !scooters.selectedScooter.active, typeActive))
+        dispatch(
+            changeStatusActiveThunk(scooters.selectedScooter.scooterId, !scooters.selectedScooter.active, typeActive)
+        )
     }
 
     useEffect(() => {
         dispatch(getScootersThunk())
         return () => dispatch({ type: REMOVE_SCOOTERS })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -57,7 +61,7 @@ const Home = React.memo(() => {
                 defaultCenter={[53.90308754854675, 27.54958379945919]}
                 defaultZoom={12}
             >
-                {scooters.data.map(marker => {
+                {scooters.data.map((marker) => {
                     return (
                         <Marker
                             key={marker.scooterId.toString()}
@@ -71,45 +75,99 @@ const Home = React.memo(() => {
             <div className={styles.map_radio_wrap}>
                 <FormControlLabel
                     className={styles.map_radio_button}
-                    style={{color: '#2d3436' }}
-                    control={<Checkbox checked={typeShows.all} onChange={() => changeType('all')} style={{color: '#2d3436' }}/>}
+                    style={{ color: '#2d3436' }}
+                    control={
+                        <Checkbox
+                            checked={typeShows.all}
+                            onChange={() => changeType('all')}
+                            style={{ color: '#2d3436' }}
+                        />
+                    }
                     label="все самокаты"
                 />
                 <FormControlLabel
                     className={styles.map_radio_button}
-                    style={{color: '#ffd700' }}
-                    control={<Checkbox checked={typeShows.active} onChange={() => changeType('active')} style={{color: '#ffd700' }}/>}
+                    style={{ color: '#ffd700' }}
+                    control={
+                        <Checkbox
+                            checked={typeShows.active}
+                            onChange={() => changeType('active')}
+                            style={{ color: '#ffd700' }}
+                        />
+                    }
                     label="в работе"
                 />
                 <FormControlLabel
                     className={styles.map_radio_button}
-                    style={{color: '#2ECC71' }}
-                    control={<Checkbox checked={typeShows.userActive} onChange={() => changeType('userActive')} style={{color: '#2ECC71' }}/>}
+                    style={{ color: '#2ECC71' }}
+                    control={
+                        <Checkbox
+                            checked={typeShows.userActive}
+                            onChange={() => changeType('userActive')}
+                            style={{ color: '#2ECC71' }}
+                        />
+                    }
                     label="у пользователей"
                 />
                 <FormControlLabel
                     className={styles.map_radio_button}
-                    style={{color: '#E74C3C' }}
-                    control={<Checkbox checked={typeShows.breakdown} onChange={() => changeType('breakdown')} style={{color: '#E74C3C' }}/>}
+                    style={{ color: '#E74C3C' }}
+                    control={
+                        <Checkbox
+                            checked={typeShows.breakdown}
+                            onChange={() => changeType('breakdown')}
+                            style={{ color: '#E74C3C' }}
+                        />
+                    }
                     label="сломанные"
                 />
             </div>
-            {scooters.selectedScooter && <Card className={styles.map_selected}>
-                <CardContent>
-                    <Typography color="textSecondary" gutterBottom>Карточка самоката</Typography>
-                    <Typography variant="h5" component="h2">Самокат {scooters.selectedScooter.scooterId}</Typography>
-                    <Typography variant="body2" component="p">Зарядка {scooters.selectedScooter.charge}%</Typography>
-                    <div className={styles.map_selected_status}>
-                        <Typography variant="body1" component="p">Статус:</Typography>
-                        <Typography variant="body2" component="p" color={scooters.selectedScooter.active ? 'primary' : 'error'}>В работе: {scooters.selectedScooter.active ? 'Активно' : 'Не активно'}</Typography>
-                        <Typography variant="body2" component="p" color={scooters.selectedScooter.userActive ? 'primary' : 'error'}>У пользователя: {scooters.selectedScooter.userActive ? 'Активно' : 'Не активно'}</Typography>
-                        <Typography variant="body2" component="p" color={scooters.selectedScooter.breakdown ? 'primary' : 'error'}>Сломан: {scooters.selectedScooter.breakdown ? 'Активно' : 'Не активно'}</Typography>
-                    </div>
-                </CardContent>
-                <CardActions>
-                    <Button color="secondary" onClick={changeStatusScooter}>{scooters.selectedScooter.active ? 'Отключить' : 'Включить'}</Button>
-                </CardActions>
-            </Card>}
+            {scooters.selectedScooter && (
+                <Card className={styles.map_selected}>
+                    <CardContent>
+                        <Typography color="textSecondary" gutterBottom>
+                            Карточка самоката
+                        </Typography>
+                        <Typography variant="h5" component="h2">
+                            Самокат {scooters.selectedScooter.scooterId}
+                        </Typography>
+                        <Typography variant="body2" component="p">
+                            Зарядка {scooters.selectedScooter.charge}%
+                        </Typography>
+                        <div className={styles.map_selected_status}>
+                            <Typography variant="body1" component="p">
+                                Статус:
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                component="p"
+                                color={scooters.selectedScooter.active ? 'primary' : 'error'}
+                            >
+                                В работе: {scooters.selectedScooter.active ? 'Активно' : 'Не активно'}
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                component="p"
+                                color={scooters.selectedScooter.userActive ? 'primary' : 'error'}
+                            >
+                                У пользователя: {scooters.selectedScooter.userActive ? 'Активно' : 'Не активно'}
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                component="p"
+                                color={scooters.selectedScooter.breakdown ? 'primary' : 'error'}
+                            >
+                                Сломан: {scooters.selectedScooter.breakdown ? 'Активно' : 'Не активно'}
+                            </Typography>
+                        </div>
+                    </CardContent>
+                    <CardActions>
+                        <Button color="secondary" onClick={changeStatusScooter}>
+                            {scooters.selectedScooter.active ? 'Отключить' : 'Включить'}
+                        </Button>
+                    </CardActions>
+                </Card>
+            )}
             {scooters.loading && <Loading />}
         </div>
     )

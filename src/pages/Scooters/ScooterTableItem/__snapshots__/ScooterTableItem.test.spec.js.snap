@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScooterTableItem component should render ScooterTableItem component 1`] = `
+<Fragment>
+  <WithStyles(ForwardRef(TableRow))>
+    <WithStyles(ForwardRef(TableCell))
+      className="scooter_cell"
+    >
+      <WithStyles(ForwardRef(IconButton))
+        aria-label="expand row"
+        className="button_collapse"
+        onClick={[Function]}
+        size="small"
+      >
+        <Memo(ForwardRef(KeyboardArrowDownIcon)) />
+      </WithStyles(ForwardRef(IconButton))>
+    </WithStyles(ForwardRef(TableCell))>
+    <WithStyles(ForwardRef(TableCell))
+      className="scooter_cell"
+    >
+      955227
+    </WithStyles(ForwardRef(TableCell))>
+    <WithStyles(ForwardRef(TableCell))
+      align="center"
+      className="scooter_cell"
+    >
+      62
+    </WithStyles(ForwardRef(TableCell))>
+    <WithStyles(ForwardRef(TableCell))
+      align="center"
+      className="scooter_cell"
+    >
+      Активно
+    </WithStyles(ForwardRef(TableCell))>
+    <WithStyles(ForwardRef(TableCell))
+      align="center"
+      className="scooter_cell"
+    >
+      Активно
+    </WithStyles(ForwardRef(TableCell))>
+    <WithStyles(ForwardRef(TableCell))
+      align="right"
+      className="scooter_cell"
+    >
+      Активно
+    </WithStyles(ForwardRef(TableCell))>
+  </WithStyles(ForwardRef(TableRow))>
+  <WithStyles(ForwardRef(TableRow))>
+    <WithStyles(ForwardRef(TableCell))
+      colSpan={6}
+      style={
+        Object {
+          "padding": 0,
+        }
+      }
+    >
+      <WithStyles(ForwardRef(Collapse))
+        className="collapse"
+        in={false}
+        timeout="auto"
+        unmountOnExit={true}
+      >
+        <div
+          className="scooter_cell_wrap"
+        >
+          <div
+            className="scooter_cell_descr"
+          >
+            <div
+              className="scooter_cell_descr_title"
+            >
+              Действия
+            </div>
+            <div
+              className="scooter_cell_descr_buttons"
+            >
+              <WithStyles(ForwardRef(Button))
+                color="primary"
+                variant="outlined"
+              >
+                Изменить статусы
+              </WithStyles(ForwardRef(Button))>
+              <WithStyles(ForwardRef(Button))
+                color="secondary"
+                variant="outlined"
+              >
+                Удалить самокат
+              </WithStyles(ForwardRef(Button))>
+            </div>
+          </div>
+          <div
+            className="scooter_cell_map"
+          >
+            <t
+              bootstrapURLKeys={
+                Object {
+                  "key": "AIzaSyDJdAJmdPxqJtHAsgMEKBFNZFFx5D6kIoA",
+                }
+              }
+              debounced={true}
+              defaultCenter={
+                Array [
+                  53.853253464874754,
+                  27.601949922194905,
+                ]
+              }
+              defaultZoom={14}
+              distanceToMouse={[Function]}
+              googleMapLoader={[Function]}
+              heatmap={Object {}}
+              heatmapLibrary={false}
+              hoverDistance={30}
+              layerTypes={Array []}
+              options={[Function]}
+              shouldUnregisterMapOnUnmount={true}
+              style={
+                Object {
+                  "height": "100%",
+                  "margin": 0,
+                  "padding": 0,
+                  "position": "relative",
+                  "width": "100%",
+                }
+              }
+              yesIWantToUseGoogleMapApiInternals={false}
+            >
+              <Marker
+                lat={53.853253464874754}
+                lng={27.601949922194905}
+                marker={
+                  Object {
+                    "__v": 0,
+                    "_id": "60f5b4bad21fa65a98c3f9f5",
+                    "active": true,
+                    "breakdown": true,
+                    "charge": 62,
+                    "location": Object {
+                      "latitude": 53.853253464874754,
+                      "longitude": 27.601949922194905,
+                    },
+                    "scooterId": 955227,
+                    "userActive": true,
+                  }
+                }
+              />
+            </t>
+          </div>
+        </div>
+      </WithStyles(ForwardRef(Collapse))>
+    </WithStyles(ForwardRef(TableCell))>
+  </WithStyles(ForwardRef(TableRow))>
+</Fragment>
+`;
